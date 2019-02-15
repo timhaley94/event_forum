@@ -1,6 +1,6 @@
-defmodule Dooga.Repo.Migrations.CreateEventsTable do
+defmodule EventForum.Repo.Migrations.CreateEventsTable do
   use Ecto.Migration
-  alias Dooga.Forum.ReactionType
+  alias EventForum.Forum.ReactionType
 
   def change do
     create table(:events) do

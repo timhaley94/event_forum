@@ -1,4 +1,4 @@
-defmodule DoogaWeb.ConnCase do
+defmodule EventForumWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -19,18 +19,18 @@ defmodule DoogaWeb.ConnCase do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
-      alias DoogaWeb.Router.Helpers, as: Routes
+      alias EventForumWeb.Router.Helpers, as: Routes
 
       # The default endpoint for testing
-      @endpoint DoogaWeb.Endpoint
+      @endpoint EventForumWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Dooga.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(EventForum.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Dooga.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(EventForum.Repo, {:shared, self()})
     end
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}

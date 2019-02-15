@@ -1,4 +1,4 @@
-defmodule Dooga.DataCase do
+defmodule EventForum.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -16,20 +16,20 @@ defmodule Dooga.DataCase do
 
   using do
     quote do
-      alias Dooga.Repo
+      alias EventForum.Repo
 
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import Dooga.DataCase
+      import EventForum.DataCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Dooga.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(EventForum.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Dooga.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(EventForum.Repo, {:shared, self()})
     end
 
     :ok

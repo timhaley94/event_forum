@@ -6,7 +6,7 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :dooga_forever, DoogaWeb.Endpoint,
+config :event_forum, EventForumWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -48,9 +48,9 @@ config :phoenix, :stacktrace_depth, 20
 config :phoenix, :plug_init_mode, :runtime
 
 # Configure your database
-config :dooga_forever, Dooga.Repo,
+config :event_forum, EventForum.Repo,
   username: "timhaley",
   password: "timhaley",
-  database: "dooga_forever_dev",
+  database: "event_forum_dev",
   hostname: "localhost",
   pool_size: 10

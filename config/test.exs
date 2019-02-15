@@ -2,7 +2,7 @@ use Mix.Config
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :dooga_forever, DoogaWeb.Endpoint,
+config :event_forum, EventForumWeb.Endpoint,
   http: [port: 4002],
   server: false
 
@@ -10,9 +10,9 @@ config :dooga_forever, DoogaWeb.Endpoint,
 config :logger, level: :warn
 
 # Configure your database
-config :dooga_forever, Dooga.Repo,
+config :event_forum, EventForum.Repo,
   username: "timhaley",
   password: "timhaley",
-  database: "dooga_forever_test",
+  database: "event_forum_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

@@ -1,4 +1,4 @@
-defmodule Dooga.Repo.Migrations.CreateUsers do
+defmodule EventForum.Repo.Migrations.CreateUsers do
   use Ecto.Migration
 
   def change do

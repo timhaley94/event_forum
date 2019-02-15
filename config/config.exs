@@ -7,16 +7,16 @@
 # General application configuration
 use Mix.Config
 
-config :dooga_forever,
-  namespace: Dooga,
-  ecto_repos: [Dooga.Repo]
+config :event_forum,
+  namespace: EventForum,
+  ecto_repos: [EventForum.Repo]
 
 # Configures the endpoint
-config :dooga_forever, DoogaWeb.Endpoint,
+config :event_forum, EventForumWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "W0e0+H7bgoT+0UCvpXSWMFZz0VXNnnqbywybWQv/L/WMC6rCLk8AnBUK3AsRkgZ0",
-  render_errors: [view: DoogaWeb.ErrorView, accepts: ~w(json)],
-  pubsub: [name: Dooga.PubSub, adapter: Phoenix.PubSub.PG2]
+  render_errors: [view: EventForumWeb.ErrorView, accepts: ~w(json)],
+  pubsub: [name: EventForum.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,

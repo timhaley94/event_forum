@@ -1,4 +1,4 @@
-# Dooga
+# EventForum
 
 To start your Phoenix server:
 

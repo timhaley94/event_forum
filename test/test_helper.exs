@@ -1,2 +1,2 @@
 ExUnit.start()
-Ecto.Adapters.SQL.Sandbox.mode(Dooga.Repo, :manual)
+Ecto.Adapters.SQL.Sandbox.mode(EventForum.Repo, :manual)
