@@ -3,13 +3,14 @@ defmodule Dooga.Forum.Event do
   import Ecto.Changeset
   alias __MODULE__
   alias Dooga.Accounts.User
+  alias Dooga.Forum.Reaction
 
   @required_fields ~w(name start_datetime location)a
-  @optional_fields ~w(description duration_minutes cost_dollars)a
+  @optional_fields ~w(description end_datetime cost_dollars)a
   @fields Enum.concat(@required_fields, @optional_fields)
 
   @required_assoc_fields ~w(creator)a
-  @optional_assoc_fields ~w()a
+  @optional_assoc_fields ~w(likes)a
 
   @max_duration 2880 # 2 days in minutes
   @max_cost 10000
@@ -18,11 +19,12 @@ defmodule Dooga.Forum.Event do
     field :name, :string
     field :description, :string
     field :start_datetime, :utc_datetime
-    field :duration_minutes, :integer
+    field :end_datetime, :utc_datetime
     field :location, :string
     field :cost_dollars, :decimal
 
     belongs_to :creator, User
+    many_to_many :reactors, User, join_through: Reaction
     timestamps()
   end
 
@@ -31,11 +33,17 @@ defmodule Dooga.Forum.Event do
     |> cast(attrs, @fields)
   end
 
-  defp put_assoc_fields(event) do
-    @required_assoc_fields
+  defp put_assoc_fields(event, fields, attrs, required?) do
+    fields
     |> Enum.reduce(event, fn field, e ->
-      put_assoc(e, field, required: true)
+      put_assoc(e, field, Map.fetch!(attrs, field), required: required?)
     end)
+  end
+
+  defp put_assocs(event, attrs) do
+    event
+    |> put_assoc_fields(@required_assoc_fields, attrs, true)
+    |> put_assoc_fields(@optional_assoc_fields, attrs, false)
   end
 
   defp validate(event) do
@@ -48,7 +56,7 @@ defmodule Dooga.Forum.Event do
   def changeset(event, attrs) do
     event
     |> cast(attrs)
-    |> put_assoc_fields()
+    |> put_assocs(attrs)
     |> validate()
   end
 end

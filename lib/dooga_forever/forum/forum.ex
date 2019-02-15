@@ -8,36 +8,40 @@ defmodule Dooga.Forum do
   alias Dooga.Repo
   alias Dooga.Forum.Event
 
-  # defp now(~M{timezone}) do
-  #   # Make timezone aware now
-  #   DateTime.now("Etc/UTC")
+  @default_timezone "US/Eastern"
+  @utc_timezone "Etc/UTC"
+
+  # defp to_utc(datetime) do
+  #   Timex.Timezone.convert(datetime, "Etc/UTC")
   # end
   #
-  # defp three_am_tonight(~M{timezone}), do
-  #
+  # defp three_am_tonight(timezone) do
+  #   timezone
+  #   |> Timex.now()
+  #   |> Timex.beginning_of_day()
+  #   |> Timex.shift(hours: 27)
+  #   |> to_utc()
   # end
-  #
-  # defp event_end_datetime(event) do
-  #
-  # end
-  #
+
   # defp event_score(event), do: 3
+
+  # defp happening_tonight(query, timezone) do
+  #   start = Timex.now()
+  #   stop = three_am_tonight(timezone)
   #
-  # defp happening_tonight(query, ~M{timezone}) do
-  #   # We need to determine what is "tonight" by comparing timezone
-  #   from event in query
-  #   where: event_end_datetime(event) >= now(),
-  #   where: event.start_datetime < three_am_tonight()
+  #   from event in query,
+  #   where: event.end_datetime >= ^start,
+  #   where: event.start_datetime < ^stop
   # end
   #
   # defp by_popularity(query) do
-  #   from event in query
-  #   order_by [desc: event_score(event), asc: event.inserted_at]
+  #   from event in query,
+  #   order_by: [desc: event_score(event), asc: event.inserted_at]
   # end
   #
   # defp by_newness(query) do
-  #   from event in query
-  #   order_by [asc: event.inserted_at, desc: event_score(event)]
+  #   from event in query,
+  #   order_by: [asc: event.inserted_at, desc: event_score(event)]
   # end
 
   @doc """
@@ -50,9 +54,9 @@ defmodule Dooga.Forum do
       [%Event{}, ...]
 
   """
-  # def new_events do
+  # def new_events(~M{timezone} = %{timezone: @default_timezone}) do
   #   Event
-  #   |> happening_tonight()
+  #   |> happening_tonight(timezone)
   #   |> by_newness()
   #   |> Repo.all()
   # end
@@ -67,9 +71,9 @@ defmodule Dooga.Forum do
       [%Event{}, ...]
 
   """
-  # def popular_events(~M{timezone} = %{timezone: "Eastern/New_York"}) do
+  # def popular_events(~M{timezone} = %{timezone: @default_timezone}) do
   #   Event
-  #   |> happening_tonight()
+  #   |> happening_tonight(timezone)
   #   |> by_popularity()
   #   |> Repo.all()
   # end

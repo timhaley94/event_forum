@@ -1,5 +1,6 @@
 defmodule Dooga.Repo.Migrations.CreateEventsTable do
   use Ecto.Migration
+  alias Dooga.Forum.ReactionType
 
   def change do
     create table(:events) do
@@ -9,8 +10,18 @@ defmodule Dooga.Repo.Migrations.CreateEventsTable do
       add :creator_id, references(:users), null: false
 
       add :description, :string
-      add :duration_minutes, :integer
+      add :end_datetime, :utc_datetime
       add :cost_dollars, :decimal
+
+      timestamps()
+    end
+
+    ReactionType.create_type
+
+    create table(:reactions) do
+      add :type, ReactionType.type()
+      add :event_id, references(:events)
+      add :user_id, references(:users)
 
       timestamps()
     end

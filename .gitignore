@@ -34,3 +34,8 @@ dooga_forever-*.tar
 # secrets files as long as you replace their contents by environment
 # variables.
 /config/*.secret.exs
+
+# OSX
+**/*/.DS_Store
+*/.DS_Store
+.DS_Store

@@ -20,7 +20,7 @@ defmodule Dooga.MixProject do
   def application do
     [
       mod: {Dooga.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :timex]
     ]
   end
 
@@ -42,6 +42,8 @@ defmodule Dooga.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:shorter_maps, "~> 2.0"},
+      {:timex, "~> 3.1"},
+      {:ecto_enum, "~> 1.2"},
     ]
   end
 
